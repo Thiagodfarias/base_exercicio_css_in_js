@@ -1,12 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
-
 import Vaga from '../../components/Vaga'
+import styled from 'styled-components'
 
-import styles from './ListaVagas.module.css'
-
-type Vaga = {
-  id: string
+type VagaType = {
+  id: number
   titulo: string
   localizacao: string
   nivel: string
@@ -16,7 +14,7 @@ type Vaga = {
   requisitos: string[]
 }
 
-const vagas = [
+const vagas: VagaType[] = [
   {
     id: 1,
     titulo: 'Desenvolvedor front-end',
@@ -86,8 +84,40 @@ const vagas = [
     salarioMin: 4000,
     salarioMax: 5000,
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
+  },
+  {
+    id: 8,
+    titulo: 'Desenvolvedor front-end para projeto internacional',
+    localizacao: 'remoto',
+    nivel: 'senior',
+    modalidade: 'pj',
+    salarioMin: 12000,
+    salarioMax: 15000,
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
+  },
+  {
+    id: 9,
+    titulo: 'Desenvolvedor front-end',
+    localizacao: 'São Paulo/SP',
+    nivel: 'junior',
+    modalidade: 'clt',
+    salarioMin: 4000,
+    salarioMax: 5000,
+    requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   }
 ]
+
+const VagasContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 16px;
+  margin-top: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`
 
 const ListaVagas = () => {
   const [filtro, setFiltro] = useState<string>('')
@@ -99,8 +129,8 @@ const ListaVagas = () => {
   return (
     <div>
       <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <ul className={styles.vagas}>
-        {vagasFiltradas.map((vag) => (
+      <VagasContainer>
+        {vagasFiltradas.map((vag: VagaType) => (
           <Vaga
             key={vag.id}
             titulo={vag.titulo}
@@ -112,7 +142,7 @@ const ListaVagas = () => {
             requisitos={vag.requisitos}
           />
         ))}
-      </ul>
+      </VagasContainer>
     </div>
   )
 }

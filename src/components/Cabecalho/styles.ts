@@ -5,4 +5,8 @@ export const StyledCabecalho = styled.header`
   color: var(--cor-principal);
   text-align: center;
   padding: 24px 0;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `
